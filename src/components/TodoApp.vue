@@ -23,25 +23,23 @@
         <li v-for="todo in todos" class="flex items-center p-2 border-b">
           <input v-model="todo.completed" type="checkbox" class="text-start" />
 
-          <template v-if="!todo.editing">
             <label class="text-center justify-center items-center pl-2">
               {{ todo.title }}</label
             >
-            <button
+            <!-- <button
               @click="editTodo(todo)"
               class="text-blue-500 hover:text-blue-800 cursor-pointer text-xl pr-4 ml-[30%]"
             >
               Edit
-            </button>
+            </button> -->
             <button
               @click="removeTodo(todo)"
               class="text-red-700 hover:text-red-800 cursor-pointer text-3xl"
             >
               &times;
             </button>
-          </template>
           
-          <template v-else>
+          <!-- <template v-else>
             <input
               v-model="todo.editedTitle"
               @keyup.enter="savedEditedTodo(todo, index)"
@@ -54,7 +52,7 @@
             >
               Save
             </button>
-        </template>
+        </template> -->
         </li>
       </ul>
     </div>
@@ -68,6 +66,7 @@ import { ref } from "vue";
 const newTodo = ref(""); //input field where users enter newtask
 const todos = ref([]); //it stores the todo items
 
+//to retrive the data
 todos.value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
 
@@ -86,23 +85,23 @@ const addTodo = () => {
 
 //delete the task
 const removeTodo = (todo) => {
-  alert("delete the todo task?");
+  alert("delete the task?");
   todos.value.splice(todos.value.indexOf(todo), 1);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value));
 };
 
-const editTodo = (todo) => {
-  todo.editing = true;
-  todo.editedTitle = todo.title;
-};
+// const editTodo = (todo) => {
+//   todo.editing = true;
+//   todo.editedTitle = todo.title;
+// };
 
-const savedEditedTodo = (todo, index) => {
-  todo.title = todo.editedTitle;
-  todo.editing = false;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value));
-};
-todos.value.forEach((todo) => {
-  todo.editing = false;
-  todo.editedTitle = "";
-});
+// const savedEditedTodo = (todo, index) => {
+//   todo.title = todo.editedTitle;
+//   todo.editing = false;
+//   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value));
+// };
+// todos.value.forEach((todo) => {
+//   todo.editing = false;
+//   todo.editedTitle = "";
+// });
 </script>
